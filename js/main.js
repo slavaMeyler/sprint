@@ -46,8 +46,23 @@ function buildBoard() {
         }
     }
 
-    board[2][2].isMine = true
-    board[3][3].isMine = true
+    // for (var i=0: i<gLevel.MINES;i++){
+
+    // }
+    var mine1 = {
+        positionI: getRandomInt(0, gLevel.SIZE - 1),
+        positionJ: getRandomInt(0, gLevel.SIZE - 1)
+    }
+    var mine2 = {
+        positionI: getRandomInt(0, gLevel.SIZE - 1),
+        positionJ: getRandomInt(0, gLevel.SIZE - 1)
+    }
+   
+        board[mine1.positionI][mine1.positionJ].isMine = true
+        board[mine2.positionI][mine2.positionJ].isMine = true
+ 
+    // board[2][2].isMine = true
+    // board[3][3].isMine = true
 
 
     // console.table(board)
@@ -62,11 +77,17 @@ function renderBoard(board) {
         strHTML += '<tr>'
         for (var j = 0; j < gLevel.SIZE; j++) {
 
-            const cell = (board[i][j].isMine) ? MINE : " "
+
+
+            const cell = (board[i][j].isMine) ? MINE : setMinesNegsCount(gBoard, i, j)
+            board[i][j].minesAroundCount = cell
             const className = `cell cell-${i}-${j}`
 
-            strHTML += `<td class="${className}">${cell}</td>`
-            // strHTML += `<td onclick="onCellClicked(${i},${j}) class="${className}">${cell}</td>`
+            // strHTML += `<td class="${className}">${cell}</td>`
+            strHTML += `<td onclick="onCellClicked(this, ${i}, ${j})" class="${className}">${cell}</td>`
+            // strHTML += `
+            // <td onclick="onCellClicked(${i},${j})" class="${className}">${cell2.minesAroundCount}</td>`
+
         }
         strHTML += '</tr>'
     }
@@ -75,10 +96,6 @@ function renderBoard(board) {
 }
 
 
-
-// var elNebsCount = document.querySelector('h2 span')
-// elNebsCount.innerText = setMinesNegsCount(gBoard, i, j)
-// elNebsCount.innerText = setMinesNegsCount(gBoard, i, j)
 
 runNegs(gBoard)
 function runNegs(board) {
@@ -108,8 +125,20 @@ function setMinesNegsCount(board, rowIdx, colIdx) {
             if (currCell.isMine) negsCount++
         }
     }
-    // var elNgsCount = document.querySelector('.negs-count span')
-    // elNgsCount.innerText = negsCount
     return negsCount
 }
 
+
+function onCellClicked(elCell, i, j) {
+    const cell = gBoard[i][j]
+
+    console.log(cell)
+    // console.log('i,j:', i, j)
+
+    // console.log(currCell.minesAroundCount)
+    // renderBoard(gBoard)
+}
+
+// var elNebsCount = document.querySelector('h2 span')
+// elNebsCount.innerText = setMinesNegsCount(gBoard, i, j)
+// elNebsCount.innerText = setMinesNegsCount(gBoard, i, j)
