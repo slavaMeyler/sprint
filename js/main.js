@@ -15,7 +15,7 @@ const MINE = '💣'
 const FLAG = '🚩'
 
 gBoard = buildBoard()
-console.log(gBoard)
+// console.log(gBoard)
 
 function onInitGame() {
     gGame = {
@@ -128,14 +128,25 @@ function onCellClicked(elCell, i, j) {
         cell.isShown = true;
         var elSpan = elCell.querySelector('span')
         elSpan.classList.remove('hidden')
+        gGame.shownCount++
+        console.log(gGame.shownCount)
+
+        // if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES)) {
+        if (gGame.shownCount === 14) {
+            isVictory
+            // console.log(isVictory)
+            gameOver()
+        }
+            
     } else {
         cell.isShown = true;
         var elSpan = elCell.querySelector('span')
         elSpan.classList.remove('hidden')
-        isVictory
+        isVictory = !isVictory
+        // console.log(isVictory)
         gameOver()
     }
-}
+} 
 
 function onCellMarked(elCell, i, j) {
     document.addEventListener("contextmenu", function (event) {
@@ -155,17 +166,16 @@ function onCellMarked(elCell, i, j) {
     // }
     // console.log( gBoard[i][j])
     // console.log(gBoard)
-    console.log(gGame.markedCount)
+    // console.log(gGame.markedCount)
 }
 
 
 function gameOver() {
-    console.log('Game Over')
     stopTimer()
-    // var msg = gGame.isVictory ? 'You Won!!!' : 'Game Over'
+    // var msg = isVictory ? 'You Won!!!' : 'Game Over'
+    // console.log(msg)
     // var msg = 'Game Over'
     gGame.isOn = false
 }
-
 
 
