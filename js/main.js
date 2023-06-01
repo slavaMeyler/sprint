@@ -8,6 +8,7 @@ var gLevel = {
 var gGame
 var gStartTime
 var gTimerInterval
+var isVictory
 
 const EMPTY = ' '
 const MINE = '💣'
@@ -18,15 +19,15 @@ console.log(gBoard)
 
 function onInitGame() {
     gGame = {
-        isOn: false,
+        isOn: true,
         shownCount: 0,
-        markedCount: 0,
+        markedCount: gLevel.SIZE ** 2,
         secsPassed: 0
     }
-
     gBoard = buildBoard()
+
     renderBoard(gBoard)
-    // startTimer()
+    startTimer()
 
     // stopTimer()
 }
@@ -51,17 +52,14 @@ function buildBoard() {
         }
     }
 
-
-
     // mines loop:
-    // for (var i=0; i<gLevel.MINES;i++){
-    //     var mine =board[getRandomInt(0, gLevel.SIZE - 1)][getRandomInt(0, gLevel.SIZE - 1)]
-    //     mine.isMine=true
-    // }
+    for (var i = 0; i < gLevel.MINES; i++) {
+        var mine = board[getRandomInt(0, gLevel.SIZE - 1)][getRandomInt(0, gLevel.SIZE - 1)]
+        mine.isMine = true
+    }
 
-    board[2][2].isMine = true
-    board[3][3].isMine = true
-
+    // board[2][2].isMine = true
+    // board[3][3].isMine = true
 
     // console.table(board)
     // console.log(board)
@@ -80,7 +78,9 @@ function renderBoard(board) {
 
             const className = `cell cell-${i}-${j}`
 
-            strHTML += `<td onclick="onCellClicked(this, ${i}, ${j})" oncontextmenu="onCellMarked(this, ${i}, ${j})" class="${className}">
+            strHTML += `<td onclick="onCellClicked(this, ${i}, ${j})"
+            onclick="onCellMarked(this, ${i}, ${j})"
+            oncontextmenu="onCellMarked(this, ${i}, ${j})" class="${className}">
             <span class="hidden">${cell.minesAroundCount}</span></td>`
 
         }
@@ -121,7 +121,6 @@ function setMinesNegsCount(board, rowIdx, colIdx) {
     return negsCount
 }
 
-
 function onCellClicked(elCell, i, j) {
     const cell = gBoard[i][j];
     // console.log(cell)
@@ -129,13 +128,12 @@ function onCellClicked(elCell, i, j) {
         cell.isShown = true;
         var elSpan = elCell.querySelector('span')
         elSpan.classList.remove('hidden')
-    }
-
-    else {
+    } else {
         cell.isShown = true;
         var elSpan = elCell.querySelector('span')
         elSpan.classList.remove('hidden')
-
+        isVictory
+        gameOver()
     }
 }
 
@@ -144,15 +142,30 @@ function onCellMarked(elCell, i, j) {
         event.preventDefault(); // Prevent the default context menu behavior
     });
 
-    gBoard[i][j].isMarked =true
-    elCell.innerHTML =FLAG
-  
+    gBoard[i][j].isMarked = true
+    elCell.innerHTML = FLAG
+    gGame.markedCount--
+
+    var elSpan = document.querySelector('.marked')
+    elSpan.innerText = gGame.markedCount
+
+    // const cell = gBoard[i][j];
+    // if (cell.isMarked) {
+    //     cell.isMarked = true;
+    // }
     // console.log( gBoard[i][j])
     // console.log(gBoard)
-
+    console.log(gGame.markedCount)
 }
 
 
+function gameOver() {
+    console.log('Game Over')
+    stopTimer()
+    // var msg = gGame.isVictory ? 'You Won!!!' : 'Game Over'
+    // var msg = 'Game Over'
+    gGame.isOn = false
+}
 
 
 
