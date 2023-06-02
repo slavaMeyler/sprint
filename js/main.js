@@ -25,18 +25,12 @@ function onInitGame() {
         secsPassed: 0
     }
     gBoard = buildBoard()
-
-    renderBoard(gBoard)
+    clearTimer()
     startTimer()
+    closeModal()
+    renderBoard(gBoard)
 
-    // stopTimer()
 }
-
-// function play() {
-//     gBoard = runGeneration(gBoard)
-//     renderBoard(gBoard)
-// }
-
 
 function buildBoard() {
     var board = []
@@ -53,13 +47,13 @@ function buildBoard() {
     }
 
     // mines loop:
-    for (var i = 0; i < gLevel.MINES; i++) {
-        var mine = board[getRandomInt(0, gLevel.SIZE - 1)][getRandomInt(0, gLevel.SIZE - 1)]
-        mine.isMine = true
-    }
+    // for (var i = 0; i < gLevel.MINES; i++) {
+    //     var mine = board[getRandomInt(0, gLevel.SIZE - 1)][getRandomInt(0, gLevel.SIZE - 1)]
+    //     mine.isMine = true
+    // }
 
-    // board[2][2].isMine = true
-    // board[3][3].isMine = true
+    board[2][2].isMine = true
+    board[3][3].isMine = true
 
     // console.table(board)
     // console.log(board)
@@ -122,6 +116,7 @@ function setMinesNegsCount(board, rowIdx, colIdx) {
 }
 
 function onCellClicked(elCell, i, j) {
+
     const cell = gBoard[i][j];
     // console.log(cell)
     if (!cell.isMine) {
@@ -131,22 +126,22 @@ function onCellClicked(elCell, i, j) {
         gGame.shownCount++
         console.log(gGame.shownCount)
 
-        // if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES)) {
-        if (gGame.shownCount === 14) {
-            isVictory
+        if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES)) {
             // console.log(isVictory)
             gameOver()
         }
-            
+
     } else {
         cell.isShown = true;
         var elSpan = elCell.querySelector('span')
         elSpan.classList.remove('hidden')
-        isVictory = !isVictory
-        // console.log(isVictory)
+        isVictory = false
+        console.log(isVictory)
+        // stopTimer()
         gameOver()
     }
-} 
+
+}
 
 function onCellMarked(elCell, i, j) {
     document.addEventListener("contextmenu", function (event) {
@@ -172,10 +167,21 @@ function onCellMarked(elCell, i, j) {
 
 function gameOver() {
     stopTimer()
-    // var msg = isVictory ? 'You Won!!!' : 'Game Over'
-    // console.log(msg)
-    // var msg = 'Game Over'
+    var msg = isVictory ? 'You Won!!!' : 'Game Over'
+    console.log(msg)
+    openModal(msg)
     gGame.isOn = false
+    isVictory = true
 }
 
+function openModal(msg) {
+    const elModal = document.querySelector('.modal')
+    const elMsg = elModal.querySelector('.msg')
+    elMsg.innerText = msg
+    elModal.style.display = 'block'
+}
 
+function closeModal() {
+    const elModal = document.querySelector('.modal')
+    elModal.style.display = 'none'
+}

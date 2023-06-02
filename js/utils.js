@@ -31,9 +31,6 @@ function stopTimer() {
 
 function startTimer() {
     gStartTime = Date.now()
-}
-function startTimer() {
-    gStartTime = Date.now()
     gTimerInterval = setInterval(updateTimer, 1)
 }
 
