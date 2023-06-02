@@ -74,4 +74,19 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
   }
 
+
+//   function bestTime(){
+//     var bestTime =-Infinity
+//     if (bestTime<timer){
+//         bestTime=timer
+//     }
+//   }
  
+function chooseLevel(size,mines) {
+    gLevel.SIZE = size
+    gLevel.MINES =mines
+    closeModal()
+    onInitGame()
+    stopTimer()
+    clearTimer()
+  }

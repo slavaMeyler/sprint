@@ -28,6 +28,7 @@ function onInitGame() {
     clearTimer()
     startTimer()
     closeModal()
+    isVictory=true
     renderBoard(gBoard)
 
 }
@@ -47,13 +48,13 @@ function buildBoard() {
     }
 
     // mines loop:
-    // for (var i = 0; i < gLevel.MINES; i++) {
-    //     var mine = board[getRandomInt(0, gLevel.SIZE - 1)][getRandomInt(0, gLevel.SIZE - 1)]
-    //     mine.isMine = true
-    // }
+    for (var i = 0; i < gLevel.MINES; i++) {
+        var mine = board[getRandomInt(0, gLevel.SIZE - 1)][getRandomInt(0, gLevel.SIZE - 1)]
+        mine.isMine = true
+    }
 
-    board[2][2].isMine = true
-    board[3][3].isMine = true
+    // board[2][2].isMine = true
+    // board[3][3].isMine = true
 
     // console.table(board)
     // console.log(board)
@@ -116,8 +117,8 @@ function setMinesNegsCount(board, rowIdx, colIdx) {
 }
 
 function onCellClicked(elCell, i, j) {
-
     const cell = gBoard[i][j];
+    // startTimer()
     // console.log(cell)
     if (!cell.isMine) {
         cell.isShown = true;
@@ -177,6 +178,11 @@ function gameOver() {
 function openModal(msg) {
     const elModal = document.querySelector('.modal')
     const elMsg = elModal.querySelector('.msg')
+    if (msg === 'Game Over') {
+        elModal.style.backgroundColor = 'black'
+    } else {
+        elModal.style.backgroundColor = 'gray'
+    }
     elMsg.innerText = msg
     elModal.style.display = 'block'
 }
