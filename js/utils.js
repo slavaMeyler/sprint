@@ -36,16 +36,20 @@ function startTimer() {
 
 function updateTimer() {
     var currentTime = Date.now()
-    var elapsedTime = currentTime - gStartTime
-    var formattedTime = (elapsedTime / 1000).toFixed(3)
+    elapsedTime = currentTime - gStartTime
+     formattedTime = (elapsedTime / 1000).toFixed(3)
     document.getElementById('timer').textContent = formattedTime
 }
 
-function clearTimer() {
-    gameOver()      //הפונקציה עובדת, אבל בקונסול לוג מופיע שניצחתי.אם יהיה זמן אתקן
-    closeModal()
-    document.getElementById('timer').textContent = (0 / 1000).toFixed(3)
-}
+
+
+
+
+    function clearTimer() {
+        gameOver()      //הפונקציה עובדת, אבל בקונסול לוג מופיע שניצחתי.אם יהיה זמן אתקן
+        closeModal()
+        document.getElementById('timer').textContent = (0 / 1000).toFixed(3)
+    }
 
 function resetNums() {
     const nums = []

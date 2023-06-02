@@ -10,6 +10,13 @@ var gStartTime
 var gTimerInterval
 var isVictory
 
+var bestTime4 =Infinity
+var bestTime8 = Infinity
+var bestTime12 = Infinity
+var formattedTime
+var elapsedTime
+
+
 const EMPTY = ' '
 const MINE = '💣'
 const FLAG = '🚩'
@@ -33,6 +40,10 @@ function onInitGame() {
     closeModal()
     isVictory = true
     renderBoard(gBoard)
+
+
+
+
 }
 
 function buildBoard() {
@@ -174,8 +185,28 @@ function gameOver() {
     openModal(msg)
     gGame.isOn = false
     isVictory = true
-}
 
+ // בהתחלה עשיתי עם פורמטד טיים , כאשר היתה ירידה בתוך טווח של מעל 10 שניות  הכל עבד. כאשר משיא של מעל 10 היה יורד למתחת ל10 לא היה מופיע שיא
+    if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES) && bestTime4 > elapsedTime && gLevel.SIZE === 4) {
+        // console.log(formattedTime)
+        bestTime4 = elapsedTime
+        console.log(bestTime4)
+        var elBtn4 = document.querySelector(".level4")
+        elBtn4.innerText = `Record for difficalty ${gLevel.SIZE} is: ${bestTime4}`
+        // console.log(`Record for difficalty ${gLevel.SIZE} is: ${bestTime}`)
+    } 
+    if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES) && bestTime8 > elapsedTime && gLevel.SIZE === 8) {
+        bestTime8 =  elapsedTime
+        var elBtn8 = document.querySelector(".level8")
+        elBtn8.innerText = `Record for difficalty ${gLevel.SIZE} is: ${bestTime8}`
+    } 
+     if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES) && bestTime12 > elapsedTime && gLevel.SIZE === 12) {
+        bestTime12 =  elapsedTime
+        var elBtn12 = document.querySelector(".level12")
+        elBtn12.innerText = `Record for difficalty ${gLevel.SIZE} is: ${bestTime12}`
+    }
+}
+// לא הצלחתי לעשות עם הסטורדג'
 function openModal(msg) {
     const elModal = document.querySelector('.modal')
     const elMsg = elModal.querySelector('.msg')
@@ -192,3 +223,5 @@ function closeModal() {
     const elModal = document.querySelector('.modal')
     elModal.style.display = 'none'
 }
+
+
