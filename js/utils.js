@@ -42,6 +42,8 @@ function updateTimer() {
 }
 
 function clearTimer() {
+    gameOver()      //הפונקציה עובדת, אבל בקונסול לוג מופיע שניצחתי.אם יהיה זמן אתקן
+    closeModal()
     document.getElementById('timer').textContent = (0 / 1000).toFixed(3)
 }
 
@@ -72,7 +74,7 @@ function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
-  }
+}
 
 
 //   function bestTime(){
@@ -81,12 +83,46 @@ function getRandomIntInclusive(min, max) {
 //         bestTime=timer
 //     }
 //   }
- 
-function chooseLevel(size,mines) {
+
+function chooseLevel(size, mines) {
     gLevel.SIZE = size
-    gLevel.MINES =mines
+    gLevel.MINES = mines
     closeModal()
     onInitGame()
     stopTimer()
     clearTimer()
-  }
+}
+
+
+
+// function onCellMarked(elCell, i, j) {
+//     document.addEventListener("contextmenu", function (event) {
+//         event.preventDefault(); // Prevent the default context menu behavior
+//     });
+
+//     gBoard[i][j].isMarked = true
+//     elCell.innerHTML = FLAG
+//     gGame.markedCount--
+//     console.log(gGame.markedCount)
+
+//     var elSpan = document.querySelector('.marked')
+//     elSpan.innerText = gGame.markedCount
+//     // console.log(gBoard[i][j].isMarked)
+// }
+
+
+
+//BDIKA
+// function onCellMarkedCancel (elCell, i, j){
+//  if ( gBoard[i][j].isMarked){
+//     elCell.innerHTML = " "
+//     gGame.markedCount++
+//     console.log(gGame.markedCount)
+//     var elSpan = document.querySelector('.marked')
+//     elSpan.innerText = gGame.markedCount
+// }
+// }
+
+// if (gGame.shownCount > 0) {
+//     startTimer()
+// }

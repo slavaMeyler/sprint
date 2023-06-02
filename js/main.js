@@ -25,12 +25,14 @@ function onInitGame() {
         secsPassed: 0
     }
     gBoard = buildBoard()
+    var elSpan = document.querySelector('.marked')
+    elSpan.innerText = gGame.markedCount
     clearTimer()
-    startTimer()
-    closeModal()
-    isVictory=true
-    renderBoard(gBoard)
+    // startTimer()
 
+    closeModal()
+    isVictory = true
+    renderBoard(gBoard)
 }
 
 function buildBoard() {
@@ -125,6 +127,8 @@ function onCellClicked(elCell, i, j) {
         var elSpan = elCell.querySelector('span')
         elSpan.classList.remove('hidden')
         gGame.shownCount++
+
+        if (gGame.shownCount === 1) startTimer()
         console.log(gGame.shownCount)
 
         if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES)) {
@@ -149,22 +153,19 @@ function onCellMarked(elCell, i, j) {
         event.preventDefault(); // Prevent the default context menu behavior
     });
 
-    gBoard[i][j].isMarked = true
-    elCell.innerHTML = FLAG
-    gGame.markedCount--
+    if (gBoard[i][j].isMarked) {
+        gBoard[i][j].isMarked = false;
+        elCell.innerHTML = "";
+        gGame.markedCount++;
+    } else {
+        gBoard[i][j].isMarked = true;
+        elCell.innerHTML = FLAG;
+        gGame.markedCount--;
+    }
 
-    var elSpan = document.querySelector('.marked')
-    elSpan.innerText = gGame.markedCount
-
-    // const cell = gBoard[i][j];
-    // if (cell.isMarked) {
-    //     cell.isMarked = true;
-    // }
-    // console.log( gBoard[i][j])
-    // console.log(gBoard)
-    // console.log(gGame.markedCount)
+    var elSpan = document.querySelector('.marked');
+    elSpan.innerText = gGame.markedCount;
 }
-
 
 function gameOver() {
     stopTimer()

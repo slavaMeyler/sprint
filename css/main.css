@@ -63,7 +63,11 @@ span.hidden {
     font-size: 20px;
     border: 3px solid black;
     background-color: rgb(26, 174, 238);
-    cursor: pointer;
+    cursor: pointer;  
+}
+
+.restart-btn:hover{
+    background-color: yellowgreen
 }
 
 .marked  {
@@ -71,7 +75,7 @@ span.hidden {
     height: 40px;
     font-size: 20px;
     border: 3px solid black;
-    background-color: rgb(14, 102, 140);
+    background-color: rgb(213, 38, 38);
 }
 
 .modal {
