@@ -15,9 +15,9 @@ table {
 }
 
 td {
-    width: 38px;
-    height: 38px;
-    font-size: 25px;
+    width: 35px;
+    height: 35px;
+    font-size: 27px;
     text-align: center;
     transition: 0.5s;
     border: 3px solid black;
@@ -97,6 +97,15 @@ span.hidden {
 
   header{
     margin-top: -23px;
+  }
+
+  .lives{
+    background-color: black;
+    color: greenyellow;
+    width: 100px;
+    margin: auto;
+    margin-top: 10px;
+    text-decoration: double
   }
 
   

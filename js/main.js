@@ -9,6 +9,7 @@ var gGame
 var gStartTime
 var gTimerInterval
 var isVictory
+var LIVES= 3
 
 var bestTime4 = Infinity
 var bestTime8 = Infinity
@@ -37,6 +38,10 @@ function onInitGame() {
 
     var elSpan = document.querySelector('.restart-btn');
     elSpan.innerText ='😀';
+    
+    var elSpan = document.querySelector('.lives');
+    elSpan.innerText =`${LIVES} lives left`;
+
     clearTimer()
     // startTimer()
 
@@ -64,13 +69,13 @@ function buildBoard() {
     }
 
     // mines loop:
-    // for (var i = 0; i < gLevel.MINES; i++) {
-    //     var mine = board[getRandomInt(0, gLevel.SIZE - 1)][getRandomInt(0, gLevel.SIZE - 1)]
-    //     mine.isMine = true
-    // }
+    for (var i = 0; i < gLevel.MINES; i++) {
+        var mine = board[getRandomInt(0, gLevel.SIZE - 1)][getRandomInt(0, gLevel.SIZE - 1)]
+        mine.isMine = true
+    }
 
-    board[2][2].isMine = true
-    board[3][3].isMine = true
+    // board[2][2].isMine = true
+    // board[3][3].isMine = true
 
     // console.table(board)
     // console.log(board)
@@ -154,6 +159,10 @@ function onCellClicked(elCell, i, j) {
 
     } else {
         cell.isShown = true;
+        LIVES--
+        var elSpan = document.querySelector('.lives');
+             elSpan.innerText =`${LIVES} lives left`;
+        if(LIVES==0){
         var elSpan = elCell.querySelector('span')
         elSpan.classList.remove('hidden')
         isVictory = false
@@ -163,6 +172,7 @@ function onCellClicked(elCell, i, j) {
              elSpan.innerText ='🤯';
         gameOver()
     }
+}
 }
 // ניסיתי המון זמן לעשות לולאה שתפתח את כל הפצצות לא הצלחתי
 
@@ -198,6 +208,7 @@ function gameOver() {
     openModal(msg)
     gGame.isOn = false
     isVictory = true
+    LIVES=3
 
     // בהתחלה עשיתי עם פורמטד טיים , כאשר היתה ירידה בתוך טווח של מעל 10 שניות  הכל עבד. כאשר משיא של מעל 10 היה יורד למתחת ל10 לא היה מופיע שיא
     if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES) && bestTime4 > elapsedTime && gLevel.SIZE === 4) {
