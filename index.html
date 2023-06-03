@@ -7,11 +7,12 @@
 
 <body onload="onInitGame()">
     <div class="buttons-contatiner">
-        <button onclick="chooseLevel(4,2)">Easy</button>
-        <button onclick="chooseLevel(8,14)">Medium</button>
-        <button onclick="chooseLevel(12,32)">Hard</button>
+        <button class="levels" onclick="chooseLevel(4,2)">Easy</button>
+        <button class="levels" onclick="chooseLevel(8,14)">Medium</button>
+        <button class="levels" onclick="chooseLevel(12,32)">Hard</button>
+        <button class="dark-mode" onclick="myFunction()" >Dark mode</button>
         <div class="lives">3 lives left</div>
-      </div>
+    </div>
     <header>
         <h1>MineSweeper</h1>
         <p id="timer">0.000</p>
@@ -37,10 +38,11 @@
     
 </body>
 
+<div class="records">
 <button class="level4">Level 4 Record</button>
 <button class="level8">Level 8 Record</button>
 <button class="level12">Level 12 Record</button>
-
+</div>
 
 <div class="footer">
     <p>SLAVA MEYLER</p>

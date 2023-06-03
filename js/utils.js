@@ -169,4 +169,7 @@ function chooseLevel(size, mines) {
 
  
 
- 
+function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+  }

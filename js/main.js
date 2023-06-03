@@ -210,6 +210,7 @@ function gameOver() {
     isVictory = true
     LIVES=3
 
+
     // בהתחלה עשיתי עם פורמטד טיים , כאשר היתה ירידה בתוך טווח של מעל 10 שניות  הכל עבד. כאשר משיא של מעל 10 היה יורד למתחת ל10 לא היה מופיע שיא
     if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES) && bestTime4 > elapsedTime && gLevel.SIZE === 4) {
         // console.log(formattedTime)
@@ -235,9 +236,9 @@ function openModal(msg) {
     const elModal = document.querySelector('.modal')
     const elMsg = elModal.querySelector('.msg')
     if (msg === 'Game Over') {
-        elModal.style.backgroundColor = 'black'
+        elModal.style.backgroundColor = 'FireBrick'
     } else {
-        elModal.style.backgroundColor = 'gray'
+        elModal.style.backgroundColor = 'SeaGreen'
     }
     elMsg.innerText = msg
     elModal.style.display = 'block'
