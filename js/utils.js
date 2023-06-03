@@ -39,11 +39,9 @@ function updateTimer() {
     elapsedTime = currentTime - gStartTime
      formattedTime = (elapsedTime / 1000).toFixed(3)
     document.getElementById('timer').textContent = formattedTime
+    // var elSpan = document.querySelector('.restart-btn');
+    //          elSpan.innerText ='😀';
 }
-
-
-
-
 
     function clearTimer() {
         gameOver()      //הפונקציה עובדת, אבל בקונסול לוג מופיע שניצחתי.אם יהיה זמן אתקן
@@ -130,3 +128,45 @@ function chooseLevel(size, mines) {
 // if (gGame.shownCount > 0) {
 //     startTimer()
 // }
+
+
+
+// else {
+//     cell.isShown = true;
+//     var elSpan = elCell.querySelector('span')
+//     elSpan.classList.remove('hidden')
+//     isVictory = false
+//     console.log(isVictory)
+//     // stopTimer()
+//     gameOver()
+// }
+
+
+// function onCellClicked(elCell, i, j) {
+//     // console.log(elCell)
+//     const cell = gBoard[i][j];
+//     // startTimer()
+//     console.log(cell)
+//     if (cell.isMine) {
+//         // console.log(cell.isMine)
+//         for (var row = 0; row < gLevel.SIZE; row++) {
+//             for (var col = 0; col < gLevel.SIZE; col++) {
+//               var currentCell = gBoard[row][col];
+//               if (currentCell.isMine) 
+//               console.log(currentCell.isMine)
+//               { currentCell.isShown = true;
+//                 var elSpan = currentCell.querySelector('span')
+//                  elSpan.classList.remove('hidden')    
+           
+               
+
+
+//               }
+//             }
+//         }
+//     }
+// }
+
+ 
+
+ 

@@ -10,7 +10,7 @@ var gStartTime
 var gTimerInterval
 var isVictory
 
-var bestTime4 =Infinity
+var bestTime4 = Infinity
 var bestTime8 = Infinity
 var bestTime12 = Infinity
 var formattedTime
@@ -22,7 +22,7 @@ const MINE = '💣'
 const FLAG = '🚩'
 
 gBoard = buildBoard()
-// console.log(gBoard)
+console.log(gBoard)
 
 function onInitGame() {
     gGame = {
@@ -34,6 +34,9 @@ function onInitGame() {
     gBoard = buildBoard()
     var elSpan = document.querySelector('.marked')
     elSpan.innerText = gGame.markedCount
+
+    var elSpan = document.querySelector('.restart-btn');
+    elSpan.innerText ='😀';
     clearTimer()
     // startTimer()
 
@@ -61,13 +64,13 @@ function buildBoard() {
     }
 
     // mines loop:
-    for (var i = 0; i < gLevel.MINES; i++) {
-        var mine = board[getRandomInt(0, gLevel.SIZE - 1)][getRandomInt(0, gLevel.SIZE - 1)]
-        mine.isMine = true
-    }
+    // for (var i = 0; i < gLevel.MINES; i++) {
+    //     var mine = board[getRandomInt(0, gLevel.SIZE - 1)][getRandomInt(0, gLevel.SIZE - 1)]
+    //     mine.isMine = true
+    // }
 
-    // board[2][2].isMine = true
-    // board[3][3].isMine = true
+    board[2][2].isMine = true
+    board[3][3].isMine = true
 
     // console.table(board)
     // console.log(board)
@@ -144,6 +147,8 @@ function onCellClicked(elCell, i, j) {
 
         if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES)) {
             // console.log(isVictory)
+            var elSpan = document.querySelector('.restart-btn');
+            elSpan.innerText ='😎';
             gameOver()
         }
 
@@ -154,10 +159,18 @@ function onCellClicked(elCell, i, j) {
         isVictory = false
         console.log(isVictory)
         // stopTimer()
+        var elSpan = document.querySelector('.restart-btn');
+             elSpan.innerText ='🤯';
         gameOver()
     }
-
 }
+// ניסיתי המון זמן לעשות לולאה שתפתח את כל הפצצות לא הצלחתי
+
+
+
+
+
+
 
 function onCellMarked(elCell, i, j) {
     document.addEventListener("contextmenu", function (event) {
@@ -186,7 +199,7 @@ function gameOver() {
     gGame.isOn = false
     isVictory = true
 
- // בהתחלה עשיתי עם פורמטד טיים , כאשר היתה ירידה בתוך טווח של מעל 10 שניות  הכל עבד. כאשר משיא של מעל 10 היה יורד למתחת ל10 לא היה מופיע שיא
+    // בהתחלה עשיתי עם פורמטד טיים , כאשר היתה ירידה בתוך טווח של מעל 10 שניות  הכל עבד. כאשר משיא של מעל 10 היה יורד למתחת ל10 לא היה מופיע שיא
     if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES) && bestTime4 > elapsedTime && gLevel.SIZE === 4) {
         // console.log(formattedTime)
         bestTime4 = elapsedTime
@@ -194,14 +207,14 @@ function gameOver() {
         var elBtn4 = document.querySelector(".level4")
         elBtn4.innerText = `Record for difficalty ${gLevel.SIZE} is: ${bestTime4}`
         // console.log(`Record for difficalty ${gLevel.SIZE} is: ${bestTime}`)
-    } 
+    }
     if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES) && bestTime8 > elapsedTime && gLevel.SIZE === 8) {
-        bestTime8 =  elapsedTime
+        bestTime8 = elapsedTime
         var elBtn8 = document.querySelector(".level8")
         elBtn8.innerText = `Record for difficalty ${gLevel.SIZE} is: ${bestTime8}`
-    } 
-     if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES) && bestTime12 > elapsedTime && gLevel.SIZE === 12) {
-        bestTime12 =  elapsedTime
+    }
+    if (gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES) && bestTime12 > elapsedTime && gLevel.SIZE === 12) {
+        bestTime12 = elapsedTime
         var elBtn12 = document.querySelector(".level12")
         elBtn12.innerText = `Record for difficalty ${gLevel.SIZE} is: ${bestTime12}`
     }
